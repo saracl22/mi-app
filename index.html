@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Título de la pestaña del navegador -->
+    <meta charset="UTF-8">
+    <!-- Permite que la app se vea bien en móviles (responsive) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título que se muestra en la pestaña del navegador -->
+    <title>Mi App de Tareas</title>
+    <!-- Enlazamos la hoja de estilos externa -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Contenedor principal de la aplicación -->
+    <div class="app">
+        <!-- Encabezado con el título y la fecha actual -->
+        <header class="app__header">
+            <h1 class="app__title">📋 Mis Tareas</h1>
+            <p class="app__subtitle" id="fechaActual">Cargando fecha...</p>
+        </header>
+
+        <!-- Formulario para agregar una nueva tarea -->
+        <form class="form" id="formTarea" autocomplete="off">
+            <!-- Campo de texto donde el usuario escribe la tarea -->
+            <input
+                type="text"
+                class="form__input"
+                id="inputTarea"
+                placeholder="¿Qué hay que hacer hoy?"
+                maxlength="120"
+            >
+            <!-- Botón para enviar el formulario -->
+            <button type="submit" class="btn btn--primary">Agregar</button>
+        </form>
+
+        <!-- Barra de filtros (todas / pendientes / completadas) -->
+        <nav class="filtros" id="filtros">
+            <!-- Filtro: mostrar todas las tareas -->
+            <button class="filtro filtro--activo" data-filtro="todas">Todas</button>
+            <!-- Filtro: mostrar solo las pendientes -->
+            <button class="filtro" data-filtro="pendientes">Pendientes</button>
+            <!-- Filtro: mostrar solo las completadas -->
+            <button class="filtro" data-filtro="completadas">Completadas</button>
+            <!-- Botón para borrar todas las tareas completadas -->
+            <button class="filtro filtro--peligro" id="limpiarCompletadas">Limpiar completadas</button>
+        </nav>
+
+        <!-- Lista donde se muestran las tareas -->
+        <ul class="lista" id="listaTareas"></ul>
+
+        <!-- Mensaje que aparece cuando no hay tareas para mostrar -->
+        <p class="vacio" id="mensajeVacio">No hay tareas. ¡Agrega la primera! ✨</p>
+
+        <!-- Pie con el contador de tareas -->
+        <footer class="app__footer">
+            <span id="contador">0 tareas</span>
+        </footer>
+    </div>
+
+    <!-- Cargamos el archivo JavaScript de la aplicación -->
+    <script src="js/app.js"></script>
+</body>
+</html>

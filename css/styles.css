@@ -1,0 +1,422 @@
+/* ==========================================================
+   ARCHIVO: styles.css
+   Descripción: Estilos de la aplicación de tareas.
+   Cada línea está comentada para facilitar el aprendizaje.
+   ========================================================== */
+
+/* ---------- Variables (colores y medidas reutilizables) ---------- */
+
+/* Paleta de colores usada en toda la app */
+:root {
+    /* Color de fondo general de la página */
+    --color-fondo: #f4f5f7;
+    /* Color de fondo de las tarjetas y cajas */
+    --color-superficie: #ffffff;
+    /* Color del texto principal */
+    --color-texto: #1f2933;
+    /* Color del texto secundario (subtítulos, contadores) */
+    --color-texto-suave: #6b7280;
+    /* Color principal de marca (botones, acentos) */
+    --color-primario: #3b82f6;
+    /* Variante más oscura del color principal para el hover */
+    --color-primario-oscuro: #2563eb;
+    /* Color de error o acciones destructivas */
+    --color-peligro: #ef4444;
+    /* Color de éxito (tareas completadas) */
+    --color-exito: #22c55e;
+    /* Color del borde de las cajas */
+    --color-borde: #e5e7eb;
+    /* Radio de las esquinas redondeadas */
+    --radio: 10px;
+    /* Sombra suave para dar profundidad */
+    --sombra: 0 4px 14px rgba(0, 0, 0, 0.08);
+    /* Tamaño máximo del contenedor central */
+    --ancho-max: 620px;
+}
+
+/* ---------- Estilos base ---------- */
+
+/* El selector universal aplica estas reglas a TODOS los elementos */
+* {
+    /* Quita el margen por defecto del navegador */
+    margin: 0;
+    /* Quita el relleno por defecto del navegador */
+    padding: 0;
+    /* Hace que el tamaño del borde se incluya en el ancho total */
+    box-sizing: border-box;
+}
+
+/* Estilos del cuerpo de la página (toda la ventana) */
+body {
+    /* Usa una fuente de sistema, siempre disponible */
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    /* Color de fondo de la página completa */
+    background-color: var(--color-fondo);
+    /* Color del texto por defecto */
+    color: var(--color-texto);
+    /* Centra verticalmente el contenido si sobra espacio */
+    min-height: 100vh;
+    /* Espaciado interno para que no pegue a los bordes */
+    padding: 32px 16px;
+    /* Permite desplazamiento vertical si el contenido no cabe */
+    overflow-y: auto;
+}
+
+/* ---------- Contenedor principal ---------- */
+
+/* La caja blanca central que contiene toda la app */
+.app {
+    /* Ancho máximo para que no se estire demasiado */
+    max-width: var(--ancho-max);
+    /* Centra la caja horizontalmente */
+    margin: 0 auto;
+    /* Fondo blanco de la caja */
+    background-color: var(--color-superficie);
+    /* Redondea las esquinas */
+    border-radius: var(--radio);
+    /* Aplica la sombra definida en las variables */
+    box-shadow: var(--sombra);
+    /* Espacio interno entre el borde y el contenido */
+    padding: 28px 24px;
+}
+
+/* ---------- Encabezado ---------- */
+
+/* Zona superior con el título */
+.app__header {
+    /* Centra el contenido del encabezado */
+    text-align: center;
+    /* Espacio debajo del encabezado */
+    margin-bottom: 22px;
+}
+
+/* Título principal de la app */
+.app__title {
+    /* Tamaño grande del título */
+    font-size: 28px;
+    /* Peso de la tipografía (negrita) */
+    font-weight: 700;
+    /* Espacio debajo del título */
+    margin-bottom: 4px;
+}
+
+/* Subtítulo con la fecha actual */
+.app__subtitle {
+    /* Tamaño de letra más pequeño */
+    font-size: 14px;
+    /* Color gris suave */
+    color: var(--color-texto-suave);
+}
+
+/* ---------- Formulario ---------- */
+
+/* Fila con el input y el botón de agregar */
+.form {
+    /* Muestra el formulario en una sola línea */
+    display: flex;
+    /* Espacio entre el input y el botón */
+    gap: 10px;
+    /* Espacio debajo del formulario */
+    margin-bottom: 18px;
+}
+
+/* Campo de texto para escribir la tarea */
+.form__input {
+    /* Ocupa todo el espacio disponible de la fila */
+    flex: 1;
+    /* Relleno interno del campo */
+    padding: 12px 14px;
+    /* Estilo de línea del campo */
+    border: 1px solid var(--color-borde);
+    /* Redondea las esquinas del campo */
+    border-radius: var(--radio);
+    /* Tamaño de la letra dentro del campo */
+    font-size: 15px;
+    /* Cambia el color del texto al escribir */
+    color: var(--color-texto);
+    /* Quita el contorno azul por defecto del navegador */
+    outline: none;
+    /* Transición suave para el efecto de foco */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Cambia el borde del campo cuando tiene el foco */
+.form__input:focus {
+    /* Borde azul de marca */
+    border-color: var(--color-primario);
+    /* Sombra azul suave alrededor del campo */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+/* ---------- Botones ---------- */
+
+/* Estilo base común de todos los botones */
+.btn {
+    /* Sin bordes alrededor */
+    border: none;
+    /* Relleno interno del botón */
+    padding: 12px 18px;
+    /* Tamaño de letra del botón */
+    font-size: 15px;
+    /* Fuente del botón */
+    font-family: inherit;
+    /* Cursor de mano al pasar por encima */
+    cursor: pointer;
+    /* Redondea las esquinas */
+    border-radius: var(--radio);
+    /* Transición suave de los cambios de estilo */
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* Efecto de pulsación al hacer clic */
+.btn:active {
+    /* Reduce un poco el tamaño al presionarlo */
+    transform: scale(0.97);
+}
+
+/* Variante azul (botón "Agregar") */
+.btn--primary {
+    /* Fondo azul */
+    background-color: var(--color-primario);
+    /* Texto blanco */
+    color: #ffffff;
+}
+
+/* Fondo más oscuro al pasar el cursor por encima */
+.btn--primary:hover {
+    /* Cambia al azul oscuro */
+    background-color: var(--color-primario-oscuro);
+}
+
+/* ---------- Barra de filtros ---------- */
+
+/* Fila que contiene los botones de filtro */
+.filtros {
+    /* Muestra todos los botones en una fila */
+    display: flex;
+    /* Permite que bajen de línea si no caben */
+    flex-wrap: wrap;
+    /* Espacio entre los botones */
+    gap: 8px;
+    /* Espacio debajo de la barra */
+    margin-bottom: 18px;
+}
+
+/* Botón de filtro individual */
+.filtro {
+    /* Relleno interno del botón */
+    padding: 7px 14px;
+    /* Sin bordes */
+    border: none;
+    /* Fondo gris claro */
+    background-color: #eef0f3;
+    /* Color de texto gris */
+    color: var(--color-texto-suave);
+    /* Tamaño de letra pequeño */
+    font-size: 13px;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Redondea las esquinas */
+    border-radius: 999px;
+    /* Transición suave */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Efecto hover del filtro */
+.filtro:hover {
+    /* Fondo un poco más oscuro */
+    background-color: #e2e5ea;
+}
+
+/* Filtro que está seleccionado en este momento */
+.filtro--activo {
+    /* Fondo azul */
+    background-color: var(--color-primario);
+    /* Texto blanco */
+    color: #ffffff;
+}
+
+/* Filtro de acción destructiva ("Limpiar completadas") */
+.filtro--peligro {
+    /* Empuja el botón al final de la fila */
+    margin-left: auto;
+    /* Texto rojo */
+    color: var(--color-peligro);
+}
+
+/* Efecto hover del filtro destructivo */
+.filtro--peligro:hover {
+    /* Fondo rojo claro */
+    background-color: #fee2e2;
+}
+
+/* ---------- Lista de tareas ---------- */
+
+/* Contenedor <ul> de las tareas */
+.lista {
+    /* Quita el margen por defecto de la lista */
+    margin: 0;
+    /* Quita el relleno por defecto de la lista */
+    padding: 0;
+    /* Muestra las tareas en columna */
+    list-style: none;
+}
+
+/* Cada tarea individual (<li>) */
+.tarea {
+    /* Muestra el checkbox y el texto en fila */
+    display: flex;
+    /* Alinea los elementos verticalmente al centro */
+    align-items: center;
+    /* Espacio entre el checkbox, el texto y el botón */
+    gap: 12px;
+    /* Relleno interno de cada tarea */
+    padding: 12px 14px;
+    /* Fondo blanco */
+    background-color: var(--color-superficie);
+    /* Borde gris claro */
+    border: 1px solid var(--color-borde);
+    /* Bordes redondeados */
+    border-radius: var(--radio);
+    /* Espacio inferior entre tareas */
+    margin-bottom: 10px;
+    /* Transición suave de los cambios */
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+/* Efecto hover de la tarea */
+.tarea:hover {
+    /* Pequeño desplazamiento a la derecha */
+    transform: translateX(3px);
+}
+
+/* Tarea que ya fue completada */
+.tarea--completada {
+    /* La vuelve semitransparente */
+    opacity: 0.6;
+}
+
+/* Casilla de verificación (checkbox) */
+.tarea__check {
+    /* Tamaño del checkbox */
+    width: 18px;
+    /* Altura del checkbox */
+    height: 18px;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Se prepara para el efecto de transición */
+    transition: transform 0.15s;
+}
+
+/* Efecto hover del checkbox */
+.tarea__check:hover {
+    /* Crece un poco al pasar el cursor */
+    transform: scale(1.15);
+}
+
+/* Texto de la tarea */
+.tarea__texto {
+    /* Ocupa el espacio libre de la fila */
+    flex: 1;
+    /* Tamaño de letra del texto */
+    font-size: 15px;
+    /* Permite romper la línea si el texto es muy largo */
+    word-break: break-word;
+    /* Transición para el efecto de tachado */
+    transition: color 0.2s;
+}
+
+/* Texto tachado cuando la tarea está completada */
+.tarea__texto--tachado {
+    /* Tacha el texto */
+    text-decoration: line-through;
+    /* Color gris */
+    color: var(--color-texto-suave);
+}
+
+/* Botón para eliminar una tarea */
+.tarea__eliminar {
+    /* Fondo transparente */
+    background: transparent;
+    /* Sin bordes */
+    border: none;
+    /* Tamaño de la letra */
+    font-size: 18px;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Padding pequeño */
+    padding: 2px 6px;
+    /* Redondea para que se vea mejor */
+    border-radius: 6px;
+    /* Transición suave */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Efecto hover del botón eliminar */
+.tarea__eliminar:hover {
+    /* Fondo rojo claro */
+    background-color: #fee2e2;
+    /* Color rojo */
+    color: var(--color-peligro);
+}
+
+/* ---------- Mensaje de lista vacía ---------- */
+
+/* Texto que se muestra cuando no hay tareas */
+.vacio {
+    /* Centra el texto */
+    text-align: center;
+    /* Color gris suave */
+    color: var(--color-texto-suave);
+    /* Tamaño de letra */
+    font-size: 15px;
+    /* Espacio arriba y abajo */
+    padding: 24px 0;
+}
+
+/* Clase que oculta el mensaje cuando no es necesario */
+.oculto {
+    /* No se muestra en pantalla */
+    display: none;
+}
+
+/* ---------- Pie de la app ---------- */
+
+/* Zona inferior con el contador de tareas */
+.app__footer {
+    /* Separación respecto a la lista */
+    margin-top: 16px;
+    /* Línea divisoria arriba */
+    border-top: 1px solid var(--color-borde);
+    /* Espacio arriba de la línea */
+    padding-top: 12px;
+    /* Tamaño de letra pequeño */
+    font-size: 13px;
+    /* Color gris */
+    color: var(--color-texto-suave);
+    /* Centra el texto */
+    text-align: center;
+}
+
+/* ---------- Adaptación a pantallas pequeñas ---------- */
+
+/* Media query: se aplica cuando la pantalla es menor de 480px */
+@media (max-width: 480px) {
+    /* Reduce el relleno de la caja principal */
+    .app {
+        /* Menos espacio interno */
+        padding: 20px 16px;
+    }
+
+    /* El título se hace más pequeño */
+    .app__title {
+        /* Tamaño de letra reducido */
+        font-size: 23px;
+    }
+
+    /* El botón "Limpiar completadas" deja de estar pegado a la derecha */
+    .filtro--peligro {
+        /* Quita el empuje al final de la fila */
+        margin-left: 0;
+    }
+}
